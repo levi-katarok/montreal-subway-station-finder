@@ -100,7 +100,7 @@ function geocodeStations() {
     const geocoder = new google.maps.Geocoder();
 
     subwayStations.forEach(station => {
-        geocoder.geocode({ 'address': station + 'subway station' + ', Montreal', 'region': 'CA' }, function (results, status) {
+        geocoder.geocode({ 'address': station + 'metro' + ', Montreal', 'region': 'CA' }, function (results, status) {
             if (status === 'OK') {
                 stationCoordinates.push({
                     name: station,
