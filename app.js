@@ -533,7 +533,9 @@ function initMap() {
     const montreal = new google.maps.LatLng(45.5017, -73.5673);
     map = new google.maps.Map(document.getElementById('map'), {
         center: montreal,
-        zoom: 12
+        zoom: 12,
+        mapTypeId: google.maps.MapTypeId.HYBRID // Set map type to HYBRID
+
     });
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
@@ -559,6 +561,7 @@ function findStations() {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'address': locationInput }, function (results, status) {
         if (status === 'OK') {
+
             map.setCenter(results[0].geometry.location);
             const origin = results[0].geometry.location;
             // document.getElementById('results').innerHTML = '';
