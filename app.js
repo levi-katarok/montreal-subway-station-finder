@@ -534,7 +534,6 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: montreal,
         zoom: 12,
-        mapTypeId: google.maps.MapTypeId.HYBRID // Set map type to HYBRID
 
     });
     directionsService = new google.maps.DirectionsService();
