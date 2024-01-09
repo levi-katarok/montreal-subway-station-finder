@@ -565,12 +565,19 @@ function findStations() {
 
             calculateDistances(origin, "WALKING");
             calculateDistances(origin, "BICYCLING");
+            scrollToFirstResult();
+
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 }
-
+function scrollToFirstResult() {
+    const firstResultElement = document.getElementById('results').querySelector('.result-section');
+    if (firstResultElement) {
+        firstResultElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
 
 
 function calculateDistances(origin, travelMode) {
