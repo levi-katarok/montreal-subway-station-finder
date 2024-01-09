@@ -142,6 +142,7 @@ function calculateDistances(origin, travelMode) {
     const chunkSize = 25; // Google Maps API limit
     const stationChunks = chunkArray(stationCoordinates, chunkSize);
     let allResults = [];
+    let completedRequests = 0; // Counter to track completed requests
 
     stationChunks.forEach((chunk, index) => {
         const destinations = chunk.map(station => new google.maps.LatLng(station.lat, station.lng));
@@ -157,9 +158,13 @@ function calculateDistances(origin, travelMode) {
                 allResults = allResults.concat(results);
 
                 // Check if all chunks are processed
-                if (index === stationChunks.length - 1) {
+                completedRequests++; // Increment the counter for each completed request
+
+                // Check if all requests have been processed
+                if (completedRequests === stationChunks.length) {
                     displayCombinedResults(allResults, travelMode);
                 }
+
             } else {
                 alert('Error was: ' + status);
             }
