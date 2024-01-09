@@ -38,7 +38,7 @@ body {
     margin-top: 20px;
 }
 
-#location-input {
+#autocomplete {
     width: 90%;
     /* More responsive width */
     padding: 10px;
@@ -79,6 +79,13 @@ button:hover {
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+}
+
+#autocomplete {
+    width: 300px; /* or any width you prefer */
+    height: 20px; /* adjust as needed */
+    padding: 5px;
+    /* additional styling */
 }
 
 .results-container {
