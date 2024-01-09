@@ -100,7 +100,7 @@ function geocodeStations() {
     const geocoder = new google.maps.Geocoder();
 
     subwayStations.forEach(station => {
-        geocoder.geocode({ 'address': station + ', Montreal', 'region': 'CA' }, function (results, status) {
+        geocoder.geocode({ 'address': station + 'subway station' + ', Montreal', 'region': 'CA' }, function (results, status) {
             if (status === 'OK') {
                 stationCoordinates.push({
                     name: station,
@@ -115,6 +115,10 @@ function geocodeStations() {
     });
 }
 
+
+function escapeApostrophe(stationName) {
+    return stationName.replace(/'/g, "\\'");
+}
 function findStations() {
     const locationInput = document.getElementById('location-input').value;
     const geocoder = new google.maps.Geocoder();
@@ -213,10 +217,10 @@ function displayCombinedResults(allResults, travelMode) {
     for (let i = 0; i < 3; i++) {
         if (allResults[i]) {
             resultsListContainer.innerHTML += `
-                <p>
-                    ${allResults[i].station}: ${allResults[i].distance}, ${allResults[i].duration}
-                    <button onclick="displayDirections('${allResults[i].station}', '${travelMode}')">Directions</button>
-                </p>`;
+            <p>
+                ${allResults[i].station}: ${allResults[i].distance}, ${allResults[i].duration}
+                <button onclick="displayDirections('${escapeApostrophe(allResults[i].station)}', '${travelMode}')">Directions</button>
+            </p>`;
         }
     }
 }
