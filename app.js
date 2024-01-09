@@ -517,6 +517,309 @@ let stationCoordinatesData = [
     }
 ]
 
+let lineStrings = [
+    {
+        "name": "Verte / Green",
+        "styleUrl": "#line-33CC00-7000",
+        "color": "#33CC00",
+        "coordinates": [
+            {
+                "lat": 45.596713,
+                "lng": -73.535313
+            },
+            {
+                "lat": 45.588845,
+                "lng": -73.539518
+            },
+            {
+                "lat": 45.582658,
+                "lng": -73.543124
+            },
+            {
+                "lat": 45.576802,
+                "lng": -73.546685
+            },
+            {
+                "lat": 45.569321,
+                "lng": -73.546987
+            },
+            {
+                "lat": 45.561239,
+                "lng": -73.547072
+            },
+            {
+                "lat": 45.553817,
+                "lng": -73.551793
+            },
+            {
+                "lat": 45.546875,
+                "lng": -73.551277
+            },
+            {
+                "lat": 45.541615,
+                "lng": -73.554282
+            },
+            {
+                "lat": 45.533199,
+                "lng": -73.552051
+            },
+            {
+                "lat": 45.523457,
+                "lng": -73.551749
+            },
+            {
+                "lat": 45.519038,
+                "lng": -73.555913
+            },
+            {
+                "lat": 45.515278,
+                "lng": -73.561105
+            },
+            {
+                "lat": 45.510767,
+                "lng": -73.564667
+            },
+            {
+                "lat": 45.507911,
+                "lng": -73.568573
+            },
+            {
+                "lat": 45.50421,
+                "lng": -73.571577
+            },
+            {
+                "lat": 45.500722,
+                "lng": -73.575052
+            },
+            {
+                "lat": 45.495218,
+                "lng": -73.579817
+            },
+            {
+                "lat": 45.489651,
+                "lng": -73.58634
+            },
+            {
+                "lat": 45.482731,
+                "lng": -73.579688
+            },
+            {
+                "lat": 45.477947,
+                "lng": -73.56943
+            },
+            {
+                "lat": 45.470815,
+                "lng": -73.566642
+            },
+            {
+                "lat": 45.462538,
+                "lng": -73.56707
+            },
+            {
+                "lat": 45.458987,
+                "lng": -73.571792
+            },
+            {
+                "lat": 45.456639,
+                "lng": -73.581877
+            },
+            {
+                "lat": 45.446402,
+                "lng": -73.604406
+            }
+        ]
+    },
+    {
+        "name": "Orange / Orange",
+        "styleUrl": "#line-FF6600-5000",
+        "color": "#FF6600",
+        "coordinates": [
+            {
+                "lat": 45.512962,
+                "lng": -73.683586
+            },
+            {
+                "lat": 45.508994,
+                "lng": -73.67483
+            },
+            {
+                "lat": 45.497925,
+                "lng": -73.659381
+            },
+            {
+                "lat": 45.494675,
+                "lng": -73.652859
+            },
+            {
+                "lat": 45.495398,
+                "lng": -73.640842
+            },
+            {
+                "lat": 45.492029,
+                "lng": -73.632259
+            },
+            {
+                "lat": 45.485289,
+                "lng": -73.62728
+            },
+            {
+                "lat": 45.479872,
+                "lng": -73.6199
+            },
+            {
+                "lat": 45.472411,
+                "lng": -73.603249
+            },
+            {
+                "lat": 45.476743,
+                "lng": -73.586596
+            },
+            {
+                "lat": 45.483122,
+                "lng": -73.580073
+            },
+            {
+                "lat": 45.489502,
+                "lng": -73.57664
+            },
+            {
+                "lat": 45.494796,
+                "lng": -73.57149
+            },
+            {
+                "lat": 45.498406,
+                "lng": -73.566685
+            },
+            {
+                "lat": 45.501533,
+                "lng": -73.560847
+            },
+            {
+                "lat": 45.506227,
+                "lng": -73.559818
+            },
+            {
+                "lat": 45.510437,
+                "lng": -73.556556
+            },
+            {
+                "lat": 45.515489,
+                "lng": -73.561363
+            },
+            {
+                "lat": 45.518495,
+                "lng": -73.56943
+            },
+            {
+                "lat": 45.524509,
+                "lng": -73.581619
+            },
+            {
+                "lat": 45.527757,
+                "lng": -73.588142
+            },
+            {
+                "lat": 45.531725,
+                "lng": -73.598099
+            },
+            {
+                "lat": 45.53858,
+                "lng": -73.613547
+            },
+            {
+                "lat": 45.543148,
+                "lng": -73.629856
+            },
+            {
+                "lat": 45.545912,
+                "lng": -73.638439
+            },
+            {
+                "lat": 45.550601,
+                "lng": -73.656291
+            },
+            {
+                "lat": 45.554448,
+                "lng": -73.667964
+            }
+        ]
+    },
+    {
+        "name": "Bleue / Blue",
+        "styleUrl": "#line-33CCFF-5000",
+        "color": "#33CCFF",
+        "coordinates": [
+            {
+                "lat": 45.559136,
+                "lng": -73.599815
+            },
+            {
+                "lat": 45.553848,
+                "lng": -73.602219
+            },
+            {
+                "lat": 45.546154,
+                "lng": -73.608226
+            },
+            {
+                "lat": 45.53882,
+                "lng": -73.613892
+            },
+            {
+                "lat": 45.535212,
+                "lng": -73.620243
+            },
+            {
+                "lat": 45.530282,
+                "lng": -73.624534
+            },
+            {
+                "lat": 45.523428,
+                "lng": -73.623847
+            },
+            {
+                "lat": 45.519699,
+                "lng": -73.61475
+            },
+            {
+                "lat": 45.510075,
+                "lng": -73.612346
+            },
+            {
+                "lat": 45.502496,
+                "lng": -73.618697
+            },
+            {
+                "lat": 45.496481,
+                "lng": -73.62316
+            },
+            {
+                "lat": 45.485891,
+                "lng": -73.627796
+            }
+        ]
+    },
+    {
+        "name": "Jaune / Yellow",
+        "styleUrl": "#line-FFFF33-5000",
+        "color": "#FFFF33",
+        "coordinates": [
+            {
+                "lat": 45.515158,
+                "lng": -73.561105
+            },
+            {
+                "lat": 45.512332,
+                "lng": -73.535829
+            },
+            {
+                "lat": 45.525441,
+                "lng": -73.521967
+            }
+        ]
+    }
+]
+
 // Function to load JSON data
 function loadStationData() {
     stationCoordinates = stationCoordinatesData.map(station => {
@@ -528,6 +831,21 @@ function loadStationData() {
     });
 }
 
+let lineStringPolylines = [];
+
+function createPolylines() {
+    lineStrings.forEach((lineString) => {
+        let polyline = new google.maps.Polyline({
+            path: lineString.coordinates,
+            geodesic: true,
+            strokeColor: lineString.color,
+            strokeOpacity: 0.8,
+            strokeWeight: 5,
+            map: map // Initially not displayed
+        });
+        lineStringPolylines.push({ name: lineString.name, polyline: polyline });
+    });
+}
 
 function initMap() {
     const montreal = new google.maps.LatLng(45.5017, -73.5673);
@@ -541,6 +859,31 @@ function initMap() {
     directionsRenderer.setMap(map);
 
     loadStationData();
+    createPolylines();
+    createToggleButtons();
+}
+
+function createToggleButtons() {
+    const buttonsContainer = document.getElementById('buttonsContainer'); // Assuming you have a container with this ID
+
+    lineStringPolylines.forEach((lineString) => {
+        let button = document.createElement("button");
+        button.style.backgroundColor = lineString.polyline.strokeColor; // Style button with line color
+        button.style.color = 'black'; // Set text color to black
+        button.innerHTML = "Toggle " + lineString.name;
+        button.addEventListener('click', function () {
+            toggleOverlay(lineString.polyline);
+        });
+        buttonsContainer.appendChild(button); // Append to a specific container
+    });
+}
+
+function toggleOverlay(polyline) {
+    if (polyline.getMap()) {
+        polyline.setMap(null);
+    } else {
+        polyline.setMap(map);
+    }
 }
 
 function chunkArray(array, size) {
@@ -667,6 +1010,8 @@ function displayCombinedResults(allResults, travelMode) {
 }
 
 
+
+
 function displayDirections(stationName, travelMode) {
     const originAddress = document.getElementById('autocomplete').value;
     document.querySelectorAll('.result-section p').forEach(p => {
@@ -736,6 +1081,7 @@ function initAutocomplete() {
             map.setCenter(place.geometry.location);
             map.setZoom(17);  // Why 17? Because it looks good.
         }
+        findStations();
 
         // You can add additional code here to handle the selected place,
         // like displaying information or marking it on the map

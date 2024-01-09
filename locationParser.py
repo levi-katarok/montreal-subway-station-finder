@@ -774,7 +774,355 @@ xml_data = """
   </Document>
 """
 
-from xml.etree import ElementTree as ET
+
+station_xml_data = """
+  <Document>
+<Placemark>
+        <name>[1] Verte / Green</name>
+        <description>Angrignon - Honoré-Beaugrand</description>
+        <styleUrl>#line-33CC00-7000</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -73.535313,45.596713,0
+            -73.539518,45.588845,0
+            -73.543124,45.582658,0
+            -73.546685,45.576802,0
+            -73.546987,45.569321,0
+            -73.547072,45.561239,0
+            -73.551793,45.553817,0
+            -73.551277,45.546875,0
+            -73.554282,45.541615,0
+            -73.552051,45.533199,0
+            -73.551749,45.523457,0
+            -73.555913,45.519038,0
+            -73.561105,45.515278,0
+            -73.564667,45.510767,0
+            -73.568573,45.507911,0
+            -73.571577,45.50421,0
+            -73.575052,45.500722,0
+            -73.579817,45.495218,0
+            -73.58634,45.489651,0
+            -73.579688,45.482731,0
+            -73.56943,45.477947,0
+            -73.566642,45.470815,0
+            -73.56707,45.462538,0
+            -73.571792,45.458987,0
+            -73.581877,45.456639,0
+            -73.604406,45.446402,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Côte-des-Neiges</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.622904,45.496436,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Université-de-Montréal</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.618161,45.502285,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Edouard-Montpetit</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.612132,45.509956,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Outremont</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.614834,45.520105,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Acadie</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.623569,45.523383,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Parc</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.62417,45.530343,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Square-Victoria</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.560654,45.50097,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[Place-d'Armes]]></name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.559797,45.505986,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Square-Victoria</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.560654,45.500962,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Champ-de-Mars</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.556631,45.510196,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sherbrooke</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.56898,45.518895,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Mont-Royal</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.581554,45.524765,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Laurier</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.588066,45.528027,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Rosemont</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.597787,45.531801,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Beaubien</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.604826,45.535001,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Jarry</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.62934,45.54338,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Crémazie</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.638256,45.545974,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Sauvé</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.655906,45.550826,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Henri-Bourassa</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.667783,45.554237,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>De Castelneau</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.619985,45.535108,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Jean-Talon</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.613676,45.538805,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Fabre</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.608012,45.546424,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name><![CDATA[D'Iberville]]></name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.602046,45.553938,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Saint-Michel</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.599601,45.558925,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[2] Orange / Orange</name>
+        <description>Henri-Bourassa - Côte-Vertu</description>
+        <styleUrl>#line-FF6600-5000</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -73.683586,45.512962,0
+            -73.67483,45.508994,0
+            -73.659381,45.497925,0
+            -73.652859,45.494675,0
+            -73.640842,45.495398,0
+            -73.632259,45.492029,0
+            -73.62728,45.485289,0
+            -73.6199,45.479872,0
+            -73.603249,45.472411,0
+            -73.586596,45.476743,0
+            -73.580073,45.483122,0
+            -73.57664,45.489502,0
+            -73.57149,45.494796,0
+            -73.566685,45.498406,0
+            -73.560847,45.501533,0
+            -73.559818,45.506227,0
+            -73.556556,45.510437,0
+            -73.561363,45.515489,0
+            -73.56943,45.518495,0
+            -73.581619,45.524509,0
+            -73.588142,45.527757,0
+            -73.598099,45.531725,0
+            -73.613547,45.53858,0
+            -73.629856,45.543148,0
+            -73.638439,45.545912,0
+            -73.656291,45.550601,0
+            -73.667964,45.554448,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>[4] Bleue / Blue</name>
+        <description>Snowdon - Saint-Michel</description>
+        <styleUrl>#line-33CCFF-5000</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -73.599815,45.559136,0
+            -73.602219,45.553848,0
+            -73.608226,45.546154,0
+            -73.613892,45.53882,0
+            -73.620243,45.535212,0
+            -73.624534,45.530282,0
+            -73.623847,45.523428,0
+            -73.61475,45.519699,0
+            -73.612346,45.510075,0
+            -73.618697,45.502496,0
+            -73.62316,45.496481,0
+            -73.627796,45.485891,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Jean-Drapeau</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.535786,45.512422,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Longueuil–Université-de-Sherbrooke</name>
+        <styleUrl>#icon-503-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            -73.521934,45.525449,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>[4] Jaune / Yellow</name>
+        <description>Longueuil - Berri-UQAM</description>
+        <styleUrl>#line-FFFF33-5000</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -73.561105,45.515158,0
+            -73.535829,45.512332,0
+            -73.521967,45.525441,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+        </Document>
+
+"""
+
 
 def extract_subway_stations(xml_data, output_file):
     """
@@ -810,4 +1158,30 @@ def extract_subway_stations(xml_data, output_file):
         json.dump(subway_stations, file, indent=4)
 
 
-extract_subway_stations(xml_data, 'subway_stations.json')
+def parse_line_strings(station_xml_data, output_file):
+    root = ET.fromstring(station_xml_data)
+
+    line_strings = []
+    for placemark in root.findall('Placemark'):
+        name = placemark.find('name').text
+        style_url = placemark.find('styleUrl').text
+        line_string_element = placemark.find('LineString')
+        if line_string_element is not None:
+            coordinates_text = line_string_element.find(
+                'coordinates').text.strip()
+            coordinates = []
+            for coord in coordinates_text.split():
+                lon, lat, _ = coord.split(',')
+                coordinates.append({'lat': float(lat), 'lng': float(lon)})
+            line_strings.append({
+                'name': name,
+                'styleUrl': style_url,
+                'coordinates': coordinates
+            })
+    with open(output_file, 'w') as file:
+        json.dump(line_strings, file, indent=4)
+    print(line_strings)
+
+
+parse_line_strings(station_xml_data, 'subway_lines.json')
+# extract_subway_stations(xml_data, 'subway_stations.json')
