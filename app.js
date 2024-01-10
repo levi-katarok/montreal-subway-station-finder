@@ -925,35 +925,46 @@ function scrollToFirstResult() {
 }
 
 
+function haversineDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+}
 function calculateDistances(origin, travelMode) {
-    const chunkSize = 25; // Google Maps API limit
-    const stationChunks = chunkArray(stationCoordinates, chunkSize);
+    let distances = stationCoordinates.map(station => {
+        return {
+            ...station,
+            distance: haversineDistance(origin.lat(), origin.lng(), station.lat, station.lng)
+        };
+    });
+    distances.sort((a, b) => a.distance - b.distance);
+    let closestStations = distances.slice(0, 5);
+    // Google Maps API calls for only the closest stations
     let allResults = [];
-    let completedRequests = 0; // Counter to track completed requests
-    stationChunks.forEach((chunk, index) => {
-        const destinations = chunk.map(station => new google.maps.LatLng(station.lat, station.lng));
-        const distanceMatrixService = new google.maps.DistanceMatrixService();
-        distanceMatrixService.getDistanceMatrix({
-            origins: [origin],
-            destinations: destinations,
-            travelMode: travelMode,
-        }, function (response, status) {
-            if (status === 'OK') {
-                const results = processDistanceResults(response, chunk, travelMode);
-                allResults = allResults.concat(results);
+    let completedRequests = 0;
+    const distanceMatrixService = new google.maps.DistanceMatrixService();
+    const destinations = closestStations.map(station => new google.maps.LatLng(station.lat, station.lng));
 
-                // Check if all chunks are processed
-                completedRequests++; // Increment the counter for each completed request
+    distanceMatrixService.getDistanceMatrix({
+        origins: [origin],
+        destinations: destinations,
+        travelMode: travelMode,
+    }, function (response, status) {
+        if (status === 'OK') {
+            const results = processDistanceResults(response, closestStations, travelMode);
+            allResults = allResults.concat(results);
 
-                // Check if all requests have been processed
-                if (completedRequests === stationChunks.length) {
-                    displayCombinedResults(allResults, travelMode);
-                }
+            // This is now only for the closest stations
+            displayCombinedResults(allResults, travelMode);
 
-            } else {
-                alert('Error was: ' + status);
-            }
-        });
+        } else {
+            alert('Error was: ' + status);
+        }
     });
 }
 
