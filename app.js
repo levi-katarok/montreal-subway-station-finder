@@ -9,7 +9,8 @@ let stationCoordinatesData = [
             "lat": 45.498457,
             "long": -73.566674
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Lucien-L'Allier",
@@ -17,7 +18,7 @@ let stationCoordinatesData = [
             "lat": 45.494841,
             "long": -73.570804
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
     },
     {
         "name": "Villa Maria",
@@ -25,7 +26,8 @@ let stationCoordinatesData = [
             "lat": 45.480294,
             "long": -73.619814
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Vend\u00f4me",
@@ -33,7 +35,8 @@ let stationCoordinatesData = [
             "lat": 45.472892,
             "long": -73.603334
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Lionel-Groulx",
@@ -41,7 +44,8 @@ let stationCoordinatesData = [
             "lat": 45.482832,
             "long": -73.579677
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": ["green", "orange"],
+        "accessible": true
     },
     {
         "name": "Place-Saint-Henri ",
@@ -49,7 +53,7 @@ let stationCoordinatesData = [
             "lat": 45.477015,
             "long": -73.586404
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
     },
     {
         "name": "C\u00f4te-Vertu",
@@ -57,7 +61,8 @@ let stationCoordinatesData = [
             "lat": 45.513804,
             "long": -73.683628
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Du Coll\u00e8ge Metro",
@@ -65,7 +70,8 @@ let stationCoordinatesData = [
             "lat": 45.509414,
             "long": -73.674616
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "De la Savane",
@@ -73,7 +79,7 @@ let stationCoordinatesData = [
             "lat": 45.49812,
             "long": -73.659853
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
     },
     {
         "name": "Namur",
@@ -81,7 +87,7 @@ let stationCoordinatesData = [
             "lat": 45.495066,
             "long": -73.653115
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
     },
     {
         "name": "Plamondon",
@@ -89,7 +95,7 @@ let stationCoordinatesData = [
             "lat": 45.495517,
             "long": -73.640756
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
     },
     {
         "name": "C\u00f4te-Sainte-Catherine",
@@ -97,7 +103,7 @@ let stationCoordinatesData = [
             "lat": 45.492449,
             "long": -73.632773
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
     },
     {
         "name": "Snowdon",
@@ -105,7 +111,8 @@ let stationCoordinatesData = [
             "lat": 45.48586,
             "long": -73.627667
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Georges-Vanier",
@@ -113,7 +120,7 @@ let stationCoordinatesData = [
             "lat": 45.48884,
             "long": -73.576511
         },
-        "line": "#icon-503-DB4436"
+        "line": "orange",
     },
     {
         "name": "Angrignon",
@@ -121,7 +128,8 @@ let stationCoordinatesData = [
             "lat": 45.446643,
             "long": -73.604622
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green",
+        "accessible": true
     },
     {
         "name": "Monk",
@@ -129,7 +137,7 @@ let stationCoordinatesData = [
             "lat": 45.451144,
             "long": -73.593227
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Jolicoeur",
@@ -137,7 +145,8 @@ let stationCoordinatesData = [
             "lat": 45.456654,
             "long": -73.581768
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green",
+        "accessible": true
     },
     {
         "name": "Verdun",
@@ -145,7 +154,7 @@ let stationCoordinatesData = [
             "lat": 45.459107,
             "long": -73.571726
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "De l'\u00c9glise",
@@ -153,7 +162,7 @@ let stationCoordinatesData = [
             "lat": 45.462598,
             "long": -73.567027
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Lasalle",
@@ -161,7 +170,7 @@ let stationCoordinatesData = [
             "lat": 45.47086,
             "long": -73.56662
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Charlevoix",
@@ -169,7 +178,7 @@ let stationCoordinatesData = [
             "lat": 45.478029,
             "long": -73.569388
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Atwater",
@@ -177,7 +186,7 @@ let stationCoordinatesData = [
             "lat": 45.48969,
             "long": -73.586275
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Guy-Concordia",
@@ -185,7 +194,7 @@ let stationCoordinatesData = [
             "lat": 45.495218,
             "long": -73.579741
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Peel",
@@ -193,7 +202,7 @@ let stationCoordinatesData = [
             "lat": 45.500729,
             "long": -73.574978
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "McGill",
@@ -201,7 +210,8 @@ let stationCoordinatesData = [
             "lat": 45.50421,
             "long": -73.571426
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green",
+        "accessible": true
     },
     {
         "name": "Place-des-Arts",
@@ -209,7 +219,8 @@ let stationCoordinatesData = [
             "lat": 45.507902,
             "long": -73.568433
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green",
+        "accessible": true
     },
     {
         "name": "Saint-Laurent",
@@ -217,7 +228,7 @@ let stationCoordinatesData = [
             "lat": 45.510806,
             "long": -73.564625
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Berri-UQAM",
@@ -225,7 +236,8 @@ let stationCoordinatesData = [
             "lat": 45.515338,
             "long": -73.56103
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": ["green", "orange", "yellow"],
+        "accessible": true
     },
     {
         "name": "Beaudry",
@@ -233,7 +245,7 @@ let stationCoordinatesData = [
             "lat": 45.519089,
             "long": -73.555826
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Papineau",
@@ -241,7 +253,7 @@ let stationCoordinatesData = [
             "lat": 45.523586,
             "long": -73.551771
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Frontenac",
@@ -249,7 +261,7 @@ let stationCoordinatesData = [
             "lat": 45.533289,
             "long": -73.551985
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Pr\u00e9fontaine",
@@ -257,7 +269,8 @@ let stationCoordinatesData = [
             "lat": 45.541676,
             "long": -73.554196
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green",
+        "accessible": true
     },
     {
         "name": "Joliette",
@@ -265,7 +278,7 @@ let stationCoordinatesData = [
             "lat": 45.546987,
             "long": -73.551299
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Pie-IX",
@@ -273,7 +286,8 @@ let stationCoordinatesData = [
             "lat": 45.553854,
             "long": -73.551771
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
+        "accessible": true
     },
     {
         "name": "Viau",
@@ -281,7 +295,8 @@ let stationCoordinatesData = [
             "lat": 45.561321,
             "long": -73.547019
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green",
+        "accessible": true
     },
     {
         "name": "Assomption",
@@ -289,7 +304,7 @@ let stationCoordinatesData = [
             "lat": 45.569397,
             "long": -73.546953
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Cadillac",
@@ -297,7 +312,7 @@ let stationCoordinatesData = [
             "lat": 45.576869,
             "long": -73.546599
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Langelier",
@@ -305,7 +320,7 @@ let stationCoordinatesData = [
             "lat": 45.582748,
             "long": -73.543103
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Radisson",
@@ -313,7 +328,7 @@ let stationCoordinatesData = [
             "lat": 45.588898,
             "long": -73.539466
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green"
     },
     {
         "name": "Honor\u00e9-Beaugrand",
@@ -321,7 +336,8 @@ let stationCoordinatesData = [
             "lat": 45.596713,
             "long": -73.535259
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "green",
+        "accessible": true
     },
     {
         "name": "C\u00f4te-des-Neiges",
@@ -377,7 +393,7 @@ let stationCoordinatesData = [
             "lat": 45.50097,
             "long": -73.560654
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
     },
     {
         "name": "Place-d'Armes",
@@ -385,7 +401,8 @@ let stationCoordinatesData = [
             "lat": 45.505986,
             "long": -73.559797
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Square-Victoria",
@@ -401,7 +418,8 @@ let stationCoordinatesData = [
             "lat": 45.510196,
             "long": -73.556631
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Sherbrooke",
@@ -409,7 +427,7 @@ let stationCoordinatesData = [
             "lat": 45.518895,
             "long": -73.56898
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
     },
     {
         "name": "Mont-Royal",
@@ -417,7 +435,8 @@ let stationCoordinatesData = [
             "lat": 45.524765,
             "long": -73.581554
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Laurier",
@@ -425,7 +444,7 @@ let stationCoordinatesData = [
             "lat": 45.528027,
             "long": -73.588066
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
     },
     {
         "name": "Rosemont",
@@ -433,7 +452,8 @@ let stationCoordinatesData = [
             "lat": 45.531801,
             "long": -73.597787
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Beaubien",
@@ -441,7 +461,7 @@ let stationCoordinatesData = [
             "lat": 45.535001,
             "long": -73.604826
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
     },
     {
         "name": "Jarry",
@@ -449,7 +469,7 @@ let stationCoordinatesData = [
             "lat": 45.54338,
             "long": -73.62934
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
     },
     {
         "name": "Cr\u00e9mazie",
@@ -457,7 +477,7 @@ let stationCoordinatesData = [
             "lat": 45.545974,
             "long": -73.638256
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
     },
     {
         "name": "Sauv\u00e9",
@@ -465,7 +485,7 @@ let stationCoordinatesData = [
             "lat": 45.550826,
             "long": -73.655906
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
     },
     {
         "name": "Henri-Bourassa",
@@ -473,7 +493,35 @@ let stationCoordinatesData = [
             "lat": 45.554237,
             "long": -73.667783
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
+        "accessible": true
+    },
+    {
+        "name": "Cartier",
+        "location": {
+            "lat": 45.561282031994494,
+            "long": -73.68124581499659
+        },
+        "line": "orange",
+        "accessible": true
+    },
+    {
+        "name": "De La Concorde",
+        "location": {
+            "lat": 45.56050350465828,
+            "long": -73.71004647620353
+        },
+        "line": "orange",
+        "accessible": true
+    },
+    {
+        "name": "Montmorency",
+        "location": {
+            "lat": 45.557165587953314,
+            "long": -73.71959450062765
+        },
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "De Castelneau",
@@ -489,7 +537,8 @@ let stationCoordinatesData = [
             "lat": 45.538805,
             "long": -73.613676
         },
-        "line": "#icon-503-DB4436-nodesc"
+        "line": "orange",
+        "accessible": true
     },
     {
         "name": "Fabre",
@@ -741,6 +790,18 @@ let lineStrings = [
             {
                 "lat": 45.554448,
                 "lng": -73.667964
+            },
+            {
+                "lat": 45.561282031994494,
+                "lng": -73.68124581499659
+            },
+            {
+                "lat": 45.56050350465828,
+                "lng": -73.71004647620353
+            },
+            {
+                "lat": 45.557165587953314,
+                "lng": -73.71959450062765
             }
         ]
     },
