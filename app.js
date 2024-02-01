@@ -286,7 +286,7 @@ let stationCoordinatesData = [
             "lat": 45.553854,
             "long": -73.551771
         },
-        "line": "green"
+        "line": "green",
         "accessible": true
     },
     {
