@@ -1,39 +1,258 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Montreal Subway Explorer | Explorateur du Métro de Montréal</title>
 
-    <title>Montreal Subway Stations Finder</title>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6GKvmqna7uFn69ZuXxohSnoh4VFs0YuE&libraries=places"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Radix UI via Unpkg -->
+    <script src="https://unpkg.com/@radix-ui/react-toggle@1.0.3/dist/index.umd.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6GKvmqna7uFn69ZuXxohSnoh4VFs0YuE&libraries=places"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .line-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-right: 4px;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .line-green {
+            background-color: #009B3A;
+            color: white;
+        }
+
+        .line-orange {
+            background-color: #FF6D00;
+            color: white;
+        }
+
+        .line-yellow {
+            background-color: #FEE100;
+            color: #000;
+        }
+
+        .line-blue {
+            background-color: #009DDC;
+            color: white;
+        }
+
+        .station-card {
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .station-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .station-card.selected {
+            border-left-color: #009B3A;
+            background-color: #f0fdf4;
+        }
+
+        .toggle-button {
+            transition: all 0.2s ease;
+        }
+
+        .toggle-button:hover {
+            transform: scale(1.05);
+        }
+
+        .toggle-button.active {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+
+        .favorite-star {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .favorite-star:hover {
+            transform: scale(1.2);
+        }
+
+        .favorite-star.active {
+            color: #FCD34D;
+        }
+
+        /* Smooth animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
 </head>
 
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="text-center sm:text-left">
+                    <h1 class="text-3xl sm:text-4xl font-bold text-slate-800 flex items-center justify-center sm:justify-start gap-3">
+                        <i class="fas fa-subway text-blue-600"></i>
+                        <span id="header-title">Montreal Subway Explorer</span>
+                    </h1>
+                    <p class="text-slate-600 mt-2 flex items-center justify-center sm:justify-start gap-2">
+                        <i class="fas fa-walking text-green-600"></i>
+                        <span id="header-subtitle">Find the nearest metro stations - walk or bike!</span>
+                        <i class="fas fa-biking text-orange-600"></i>
+                    </p>
+                </div>
 
-
-<body>
-    <header>
-        <h1><i class="fas fa-subway"></i> Montreal Subway Explorer</h1>
-        <p><i class="fas fa-walking"></i> Discover the nearest Montreal subway stations - choose between a leisurely
-            walk <i class="fas fa-biking"></i> or a quick bike ride!</p>
+                <!-- Language Toggle -->
+                <div class="flex items-center gap-3">
+                    <button id="lang-toggle"
+                        class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold">
+                        <i class="fas fa-language"></i>
+                        <span id="lang-text">FR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
-    <input type="text" id="autocomplete" placeholder="Enter a location">
-    <div id="buttonsContainer" style="margin-top: 10px;"></div>
-    <!-- <button onclick="findStations()">Search</button> -->
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <div id="results" class="results-container">
-        <div id="results-walking" class="result-section">
-            <h3>Top Walking Stations <i class="fas fa-walking"></i></h3>
-            <div id="walking-results-list"></div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Search Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex flex-col gap-4">
+                <!-- Search Input -->
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="autocomplete"
+                        class="w-full pl-12 pr-4 py-4 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-200 transition-all text-lg"
+                        placeholder="Enter a location...">
+                </div>
+
+                <!-- Filters Row -->
+                <div class="flex flex-wrap gap-3 items-center">
+                    <!-- Accessibility Filter -->
+                    <label class="flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-lg cursor-pointer hover:bg-slate-200 transition-all">
+                        <input type="checkbox" id="accessibility-filter" class="w-5 h-5 rounded accent-blue-600">
+                        <i class="fas fa-wheelchair text-blue-600"></i>
+                        <span id="accessibility-label" class="font-medium text-slate-700">Accessible Only</span>
+                    </label>
+
+                    <!-- Favorites Button -->
+                    <button id="favorites-btn"
+                        class="flex items-center gap-2 px-4 py-2 bg-yellow-100 text-yellow-800 rounded-lg hover:bg-yellow-200 transition-all font-medium">
+                        <i class="fas fa-star"></i>
+                        <span id="favorites-label">Favorites</span>
+                        <span id="favorites-count" class="bg-yellow-300 px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                    </button>
+                </div>
+
+                <!-- Subway Line Toggles -->
+                <div class="border-t pt-4">
+                    <p class="text-sm font-semibold text-slate-600 mb-3" id="toggle-lines-label">Toggle Metro Lines:</p>
+                    <div id="buttonsContainer" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
         </div>
-        <div id="results-bicycling" class="result-section">
-            <h3>Top Biking Stations <i class="fas fa-biking"></i></h3>
-            <div id="bicycling-results-list"></div>
+
+        <!-- Map -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-6">
+            <div id="map" class="w-full h-96 sm:h-[500px]"></div>
         </div>
-    </div>
+
+        <!-- Results -->
+        <div id="results" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Walking Results -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                    <i class="fas fa-walking text-green-600"></i>
+                    <span id="walking-title">Walking Stations</span>
+                </h3>
+                <div id="walking-results-list" class="space-y-3"></div>
+            </div>
+
+            <!-- Biking Results -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 fade-in">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                    <i class="fas fa-biking text-orange-600"></i>
+                    <span id="biking-title">Biking Stations</span>
+                </h3>
+                <div id="bicycling-results-list" class="space-y-3"></div>
+            </div>
+        </div>
+
+        <!-- Favorites Modal -->
+        <div id="favorites-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+                <div class="p-6 border-b flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <span id="favorites-modal-title">My Favorite Locations</span>
+                    </h2>
+                    <button id="close-favorites" class="text-slate-400 hover:text-slate-600 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="p-6 overflow-y-auto max-h-[60vh]">
+                    <div id="favorites-list" class="space-y-3"></div>
+                    <div id="no-favorites" class="text-center py-12 text-slate-400">
+                        <i class="fas fa-star text-6xl mb-4 opacity-20"></i>
+                        <p class="text-lg" id="no-favorites-text">No favorite locations yet. Search for a location and click the star to save it!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script src="app.js"></script>
 </body>
