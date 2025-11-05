@@ -1,0 +1,32 @@
+{
+  "name": "montreal-subway-explorer",
+  "version": "2.0.0",
+  "description": "Enhanced Montreal subway station finder with multi-modal transit and weather integration",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.2"
+  },
+  "devDependencies": {
+    "@types/google.maps": "^3.55.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  },
+  "keywords": [
+    "montreal",
+    "metro",
+    "transit",
+    "subway",
+    "stm",
+    "rem",
+    "weather",
+    "multi-modal"
+  ],
+  "author": "",
+  "license": "MIT"
+}
