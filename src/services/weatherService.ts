@@ -1,5 +1,5 @@
 // ============================================================================
-// WEATHER SERVICE - OpenWeatherMap Integration
+// WEATHER SERVICE - WeatherAPI.com Integration
 // ============================================================================
 
 import type {
@@ -9,10 +9,9 @@ import type {
   WeatherAPIResponse,
 } from '../types';
 
-const WEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || 'demo';
-const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather';
-const MONTREAL_LAT = 45.5017;
-const MONTREAL_LON = -73.5673;
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHERAPI_KEY || '7728de99273a4c0186e151255250511';
+const WEATHER_API_URL = 'https://api.weatherapi.com/v1/current.json';
+const MONTREAL_QUERY = 'Montreal,Canada';
 
 // Cache weather data for 10 minutes
 let weatherCache: { data: WeatherData; timestamp: number } | null = null;
@@ -33,7 +32,7 @@ export class WeatherService {
 
     try {
       const response = await fetch(
-        `${WEATHER_API_URL}?lat=${MONTREAL_LAT}&lon=${MONTREAL_LON}&units=metric&appid=${WEATHER_API_KEY}`
+        `${WEATHER_API_URL}?key=${WEATHER_API_KEY}&q=${MONTREAL_QUERY}&aqi=no`
       );
 
       if (!response.ok) {
@@ -58,29 +57,28 @@ export class WeatherService {
   }
 
   /**
-   * Parse OpenWeatherMap API response
+   * Parse WeatherAPI.com API response
    */
   private static parseWeatherResponse(
     data: WeatherAPIResponse
   ): WeatherData {
-    const condition = this.mapWeatherCondition(data.weather[0].main);
-    const precipitation =
-      (data.rain?.['1h'] || 0) + (data.snow?.['1h'] || 0);
+    const condition = this.mapWeatherCondition(data.current.condition.text);
+    const precipitation = data.current.precip_mm;
 
     return {
-      temperature: Math.round(data.main.temp),
-      feelsLike: Math.round(data.main.feels_like),
+      temperature: Math.round(data.current.temp_c),
+      feelsLike: Math.round(data.current.feelslike_c),
       condition,
-      description: data.weather[0].description,
-      humidity: data.main.humidity,
-      windSpeed: Math.round(data.wind.speed * 3.6), // Convert m/s to km/h
+      description: data.current.condition.text,
+      humidity: data.current.humidity,
+      windSpeed: Math.round(data.current.wind_kph),
       precipitation,
-      timestamp: data.dt * 1000,
+      timestamp: data.current.last_updated_epoch * 1000,
     };
   }
 
   /**
-   * Map OpenWeatherMap condition to our simplified types
+   * Map WeatherAPI.com condition to our simplified types
    */
   private static mapWeatherCondition(
     condition: string
@@ -88,9 +86,12 @@ export class WeatherService {
     const conditionLower = condition.toLowerCase();
     if (conditionLower.includes('rain') || conditionLower.includes('drizzle'))
       return 'rain';
-    if (conditionLower.includes('snow')) return 'snow';
-    if (conditionLower.includes('clear')) return 'clear';
-    if (conditionLower.includes('extreme')) return 'extreme';
+    if (conditionLower.includes('snow') || conditionLower.includes('sleet') || conditionLower.includes('blizzard'))
+      return 'snow';
+    if (conditionLower.includes('clear') || conditionLower.includes('sunny'))
+      return 'clear';
+    if (conditionLower.includes('storm') || conditionLower.includes('thunder') || conditionLower.includes('tornado'))
+      return 'extreme';
     return 'clouds';
   }
 

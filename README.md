@@ -2,7 +2,9 @@
 
 A comprehensive, multi-modal journey planner for Montreal's public transit system with real-time weather integration.
 
-## ✨ Features
+> **🚀 Quick Start:** New to this app? Check out [SETUP.md](./SETUP.md) for a 5-minute setup guide!
+
+w## ✨ Features
 
 ### 🎯 Core Features
 - **Multi-Modal Journey Planning**: Combine walking, biking, metro, REM, commuter trains, buses, and driving
@@ -38,7 +40,7 @@ A comprehensive, multi-modal journey planner for Montreal's public transit syste
 ### Prerequisites
 - Node.js 18+ and npm/yarn/pnpm
 - Google Maps API key
-- OpenWeatherMap API key (free tier available)
+- WeatherAPI.com API key (free tier available)
 
 ### Installation
 
@@ -65,7 +67,7 @@ A comprehensive, multi-modal journey planner for Montreal's public transit syste
    Edit `.env` and add your API keys:
    ```env
    VITE_GOOGLE_MAPS_API_KEY=your_key_here
-   VITE_OPENWEATHER_API_KEY=your_key_here
+   VITE_WEATHERAPI_KEY=your_key_here
    ```
 
 4. **Run development server**
@@ -96,10 +98,13 @@ npm run preview  # Preview production build
 4. Create credentials (API Key)
 5. Restrict the key to your domain (recommended)
 
-### OpenWeatherMap API
-1. Sign up at [OpenWeatherMap](https://openweathermap.org/api)
-2. Get a free API key
-3. Free tier includes current weather (sufficient for this app)
+### WeatherAPI.com
+1. Sign up at [WeatherAPI.com](https://www.weatherapi.com/signup.aspx)
+2. Get a free API key from your dashboard
+3. Free tier includes:
+   - Current weather data
+   - 1,000,000 calls/month
+   - Real-time weather updates
 
 ## 📁 Project Structure
 
@@ -126,7 +131,7 @@ montreal-transit-explorer/
 - **Vite**: Fast build tool and dev server
 - **Tailwind CSS**: Utility-first CSS framework
 - **Google Maps API**: Maps, places, directions
-- **OpenWeatherMap API**: Real-time weather data
+- **WeatherAPI.com**: Real-time weather data
 - **LocalStorage**: Client-side data persistence
 
 ## 🌐 Browser Support
@@ -155,7 +160,7 @@ MIT License - feel free to use this project for any purpose.
 
 - **STM (Société de transport de Montréal)** - Metro system data
 - **ARTM** - REM and regional transit information
-- **OpenWeatherMap** - Weather data API
+- **WeatherAPI.com** - Weather data API
 - **Google Maps Platform** - Mapping and routing services
 
 ## 🗺️ Roadmap
