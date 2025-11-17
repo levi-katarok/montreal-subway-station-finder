@@ -1,194 +1,121 @@
-# 🚇 Montreal Transit Explorer
+# Montreal Bike Route Assistant 🚴‍♂️
 
-A comprehensive, multi-modal journey planner for Montreal's public transit system with real-time weather integration.
+An intelligent bike route planner for Montreal with AI-powered route suggestions, real-time safety scoring, elevation analysis, and air quality monitoring.
 
-> **🚀 Quick Start:** New to this app? Check out [SETUP.md](./SETUP.md) for a 5-minute setup guide!
+## ✨ Features
 
-w## ✨ Features
+- 🤖 **AI-Powered Planning** - Chat with an LLM agent to find the perfect route
+- 🗺️ **Smart Safety Scoring** - Routes rated 0-100 based on road types, traffic, and time of day
+- ⛰️ **Elevation Profiles** - See hills before you ride them
+- 🌬️ **Air Quality Data** - Real-time air quality monitoring
+- 💬 **Streaming Chat** - Real-time responses with markdown formatting
+- 🌍 **Bilingual** - Full support for English and French
+- 📍 **Google Maps Integration** - Powered by MCP (Model Context Protocol)
 
-### 🎯 Core Features
-- **Multi-Modal Journey Planning**: Combine walking, biking, metro, REM, commuter trains, buses, and driving
-- **Weather Integration**: Real-time weather-based route recommendations
-- **Bilingual Support**: Full French/English interface
-- **Accessibility Focus**: Filter for wheelchair-accessible routes
-- **Transfer Information**: Detailed platform-to-platform transfer times and directions
-
-### 🚉 Transit Coverage
-- **Montreal Metro**: All 4 lines (Green, Orange, Blue, Yellow)
-- **REM (Réseau express métropolitain)**: New automated light rail system
-- **Exo Commuter Trains**: Integration with regional rail
-- **STM Buses**: Bus + Metro combinations
-- **BIXI**: Bike share integration
-
-### 🌤️ Weather Features
-- Real-time weather conditions for Montreal
-- Temperature-adjusted travel times
-- Indoor route recommendations in bad weather
-- Precipitation and wind speed considerations
-- Weather-specific travel mode suggestions
-
-### 🏗️ Advanced Features
-- Save favorite locations
-- Park-and-ride route suggestions
-- Indoor connection mapping
-- Accessibility filters
-- Real-time distance calculations
-- Multiple route alternatives with rankings
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ and npm/yarn/pnpm
-- Google Maps API key
-- WeatherAPI.com API key (free tier available)
+
+- Node.js 18+
+- Bun (package manager)
+- OpenAI API Key - [Get one here](https://platform.openai.com/api-keys)
+- Google Maps API Key - [Get one here](https://console.cloud.google.com/)
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/montreal-subway-explorer.git
-   cd montreal-subway-explorer
-   ```
+```bash
+# Install dependencies
+bun install
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
+# Create .env file in root
+cat > .env << EOF
+VITE_OPENAI_API_KEY=your_openai_key_here
+VITE_GOOGLE_MAPS_API_KEY=your_google_maps_key_here
+OPENAI_API_KEY=your_openai_key_here
+GOOGLE_MAPS_API_KEY=your_google_maps_key_here
+EOF
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   ```
+# Start development servers
+bun dev
+```
 
-   Edit `.env` and add your API keys:
-   ```env
-   VITE_GOOGLE_MAPS_API_KEY=your_key_here
-   VITE_WEATHERAPI_KEY=your_key_here
-   ```
+This starts:
+- **Frontend** at http://localhost:5173
+- **API server** at http://localhost:3001
 
-4. **Run development server**
-   ```bash
-   npm run dev
-   ```
+## 🏗️ Project Structure
 
-5. **Open in browser**
-   Navigate to `http://localhost:3000`
+```
+montreal-bike-route-assistant/
+├── apps/
+│   ├── api/          # Express API server with LLM agent
+│   └── client/       # React frontend (Vite)
+├── packages/
+│   └── shared/       # Shared TypeScript types
+├── server/           # MCP server configuration
+└── src/              # Legacy code (being migrated)
+```
 
-### Building for Production
+## 🧠 How Safety Score Works
+
+Each route gets a safety score (0-100) based on:
+
+- **Road Types** - Residential streets (+) vs highways (-)
+- **Time of Day** - Daytime (+) vs rush hour/night (-)
+- **Traffic Patterns** - Residential areas (+) vs major roads (-)
+- **Route Warnings** - Google Maps safety warnings
+- **Complexity** - Too many turns can be confusing
+
+*The algorithm encourages longer rides through safer streets rather than shorter routes on busy roads.*
+
+## 💻 Development
 
 ```bash
-npm run build
-npm run preview  # Preview production build
-```
+# Run everything
+bun dev
 
-## 🔑 API Keys
+# Run client only
+cd apps/client && bun dev
 
-### Google Maps API
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing
-3. Enable these APIs:
-   - Maps JavaScript API
-   - Places API
-   - Directions API
-   - Distance Matrix API
-4. Create credentials (API Key)
-5. Restrict the key to your domain (recommended)
+# Run API only
+cd apps/api && bun dev
 
-### WeatherAPI.com
-1. Sign up at [WeatherAPI.com](https://www.weatherapi.com/signup.aspx)
-2. Get a free API key from your dashboard
-3. Free tier includes:
-   - Current weather data
-   - 1,000,000 calls/month
-   - Real-time weather updates
+# Type checking
+bun run type-check
 
-## 📁 Project Structure
-
-```
-montreal-transit-explorer/
-├── src/
-│   ├── types/           # TypeScript type definitions
-│   ├── data/            # Station data, line info, transfers
-│   ├── services/        # Weather, maps, multi-modal planning
-│   ├── utils/           # Helpers, translations, storage
-│   ├── components/      # UI components (future)
-│   └── main.ts          # Application entry point
-├── public/              # Static assets
-├── index.html           # HTML entry point
-├── package.json         # Dependencies and scripts
-├── tsconfig.json        # TypeScript configuration
-├── vite.config.ts       # Vite build configuration
-└── .env.example         # Environment variable template
+# Build for production
+bun run build
 ```
 
 ## 🛠️ Tech Stack
 
-- **TypeScript**: Type-safe development
-- **Vite**: Fast build tool and dev server
-- **Tailwind CSS**: Utility-first CSS framework
-- **Google Maps API**: Maps, places, directions
-- **WeatherAPI.com**: Real-time weather data
-- **LocalStorage**: Client-side data persistence
+- **Frontend** - React, TypeScript, Vite, Tailwind CSS
+- **Backend** - Express, Node.js, TypeScript
+- **AI** - OpenAI GPT-4o-mini via Vercel AI SDK 5.0
+- **Maps** - Google Maps API + MCP Server
+- **Package Manager** - Bun
 
-## 🌐 Browser Support
+## 📝 Key Commands
 
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers (iOS Safari, Chrome Mobile)
+```bash
+# Install package to client
+bun add <package> --filter @montreal-bike-assistant/client
+
+# Install package to API
+bun add <package> --filter @montreal-bike-assistant/api
+
+# Add to shared types
+bun add <package> --filter @montreal-bike-assistant/shared
+```
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+This is a personal project, but feel free to fork and adapt for your city!
 
-### Development Guidelines
-1. Follow TypeScript best practices
-2. Add types for all new functions/components
-3. Write clear commit messages
-4. Test on multiple browsers
-5. Update documentation as needed
+## 📄 License
 
-## 📝 License
-
-MIT License - feel free to use this project for any purpose.
-
-## 🙏 Acknowledgments
-
-- **STM (Société de transport de Montréal)** - Metro system data
-- **ARTM** - REM and regional transit information
-- **WeatherAPI.com** - Weather data API
-- **Google Maps Platform** - Mapping and routing services
-
-## 🗺️ Roadmap
-
-- [ ] Real-time STM service alerts integration
-- [ ] Route history and analytics
-- [ ] Crowding predictions
-- [ ] Station amenities database
-- [ ] Voice navigation
-- [ ] Offline mode with cached data
-- [ ] Progressive Web App (PWA) support
-- [ ] Integration with OPUS card balance
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-- Open an issue on GitHub
-- Email: [your-email@example.com]
-
-## 🏙️ About Montreal's Transit System
-
-Montreal has one of the most extensive public transit systems in North America:
-- **Metro**: 68 stations across 4 lines, opened 1966
-- **REM**: New 67km automated light rail network
-- **Exo**: 6 commuter train lines serving greater Montreal
-- **STM Buses**: 200+ routes covering the city
-- **BIXI**: 10,000+ bikes at 800+ stations
+MIT
 
 ---
 
-Made with ❤️ for Montreal residents and visitors
+Built with ❤️ for Montreal cyclists

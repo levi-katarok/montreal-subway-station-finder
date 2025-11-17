@@ -1,99 +1,178 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Header } from './components/Header';
-import { WeatherWidget } from './components/WeatherWidget';
-import { SearchSection } from './components/SearchSection';
-import { MapComponent } from './components/MapComponent';
-import { ResultsList } from './components/ResultsList';
-import { FavoritesDialog } from './components/FavoritesDialog';
-import { WeatherService } from './services/weatherService';
-import type { WeatherData } from './types';
+import { ChatInterface } from './components/ChatInterface';
+import { RouteFeed } from './components/RouteFeed';
+import { RouteDetailView } from './components/RouteDetailView';
+import { BottomNav } from './components/BottomNav';
+import { BikeMapComponent } from './components/BikeMapComponent';
+import { RouteOrchestrator } from './services/routeOrchestrator';
+import type { ChatMessage, BikeRoute } from './types';
+
+type Tab = 'home' | 'map' | 'add';
 
 function App() {
   const [language, setLanguage] = useState<'en' | 'fr'>('en');
-  const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [showFavorites, setShowFavorites] = useState(false);
-  const [accessibleOnly, setAccessibleOnly] = useState(false);
-  const [preferIndoor, setPreferIndoor] = useState(false);
-  const [includeDriving, setIncludeDriving] = useState(false);
-  const [activeLines, setActiveLines] = useState<string[]>(['green', 'orange', 'blue', 'yellow']);
-  const [selectedLocation, setSelectedLocation] = useState<google.maps.LatLng | null>(null);
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
-
-  // Load weather on mount
-  useEffect(() => {
-    const loadWeather = async () => {
-      try {
-        const weatherData = await WeatherService.getCurrentWeather();
-        if (weatherData) {
-          setWeather(weatherData);
-        }
-      } catch (error) {
-        console.error('Failed to load weather:', error);
-      }
-    };
-    loadWeather();
-  }, []);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [routes, setRoutes] = useState<BikeRoute[]>([]);
+  const [selectedRoute, setSelectedRoute] = useState<BikeRoute | null>(null);
+  const [activeTab, setActiveTab] = useState<Tab>('home');
+  const [showChat, setShowChat] = useState(false);
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'fr' : 'en');
   };
 
-  const toggleLine = (line: string) => {
-    setActiveLines(prev =>
-      prev.includes(line)
-        ? prev.filter(l => l !== line)
-        : [...prev, line]
-    );
-  };
+  const handleRouteRequest = async (query: string) => {
+    // Add user message
+    const userMessage: ChatMessage = {
+      id: `user-${Date.now()}`,
+      role: 'user',
+      content: query,
+      timestamp: Date.now(),
+    };
+    setMessages(prev => [...prev, userMessage]);
 
-  const handlePlaceSelected = (place: google.maps.places.PlaceResult) => {
-    if (place.geometry?.location) {
-      const location = place.geometry.location;
-      setSelectedLocation(location);
-      setUserLocation({
-        lat: location.lat(),
-        lng: location.lng(),
-      });
-      console.log('📍 Location selected:', place.formatted_address);
+    setIsLoading(true);
+
+    try {
+      // Process the route query
+      const result = await RouteOrchestrator.processRouteQuery(
+        query,
+        language
+      );
+
+      // Add assistant messages
+      setMessages(prev => [...prev, ...result.messages]);
+
+      // Add route to feed
+      if (result.route) {
+        setRoutes(prev => [result.route!, ...prev]);
+        setShowChat(false);
+      }
+
+    } catch (error) {
+      console.error('Error processing route:', error);
+      
+      // Add error message
+      const errorMessage: ChatMessage = {
+        id: `error-${Date.now()}`,
+        role: 'assistant',
+        content: language === 'en'
+          ? 'Sorry, I encountered an error. Please try again.'
+          : 'Désolé, j\'ai rencontré une erreur. Veuillez réessayer.',
+        timestamp: Date.now(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  const handleRouteClick = (route: BikeRoute) => {
+    setSelectedRoute(route);
+  };
+
+  const handleTabChange = (tab: Tab) => {
+    setActiveTab(tab);
+    if (tab === 'add') {
+      setShowChat(true);
+      setSelectedRoute(null);
+    } else {
+      setShowChat(false);
+      setSelectedRoute(null);
+    }
+  };
+
+  // Show route detail view
+  if (selectedRoute) {
+    return (
+      <div className="min-h-screen bg-white">
+        <RouteDetailView
+          route={selectedRoute}
+          language={language}
+          onClose={() => setSelectedRoute(null)}
+        />
+        <BottomNav
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          language={language}
+        />
+      </div>
+    );
+  }
+
+  // Show chat interface
+  if (showChat) {
+    return (
+      <div className="min-h-screen bg-black flex flex-col">
+        <Header
+          language={language}
+          onToggleLanguage={toggleLanguage}
+        />
+        <div className="flex-1 overflow-hidden">
+          <ChatInterface
+            onRouteRequest={handleRouteRequest}
+            messages={messages}
+            setMessages={setMessages}
+            isLoading={isLoading}
+            language={language}
+          />
+        </div>
+        <BottomNav
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          language={language}
+        />
+      </div>
+    );
+  }
+
+  // Show map view
+  if (activeTab === 'map') {
+    return (
+      <div className="h-screen bg-black flex flex-col overflow-hidden">
+        <Header
+          language={language}
+          onToggleLanguage={toggleLanguage}
+        />
+        <div className="flex-1 relative w-full overflow-hidden min-h-0">
+          <BikeMapComponent
+            route={routes.length > 0 ? routes[0] : null}
+            language={language}
+            showTraffic={true}
+            hideControls={false}
+          />
+        </div>
+        <BottomNav
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          language={language}
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className="h-screen bg-black flex flex-col overflow-hidden">
       <Header
         language={language}
         onToggleLanguage={toggleLanguage}
       />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
-        {weather && (
-          <WeatherWidget weather={weather} language={language} />
-        )}
-
-        <SearchSection
+      <main className="flex-1 overflow-y-auto max-w-md mx-auto w-full px-4">
+        {/* Route Feed */}
+        <RouteFeed
+          routes={routes}
           language={language}
-          accessibleOnly={accessibleOnly}
-          preferIndoor={preferIndoor}
-          includeDriving={includeDriving}
-          activeLines={activeLines}
-          onAccessibleChange={setAccessibleOnly}
-          onIndoorChange={setPreferIndoor}
-          onDrivingChange={setIncludeDriving}
-          onToggleLine={toggleLine}
-          onShowFavorites={() => setShowFavorites(true)}
-          onPlaceSelected={handlePlaceSelected}
+          onRouteClick={handleRouteClick}
         />
-
-        {/* Side-by-side layout for map and results */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <MapComponent userLocation={userLocation} selectedLocation={selectedLocation} />
-          <ResultsList language={language} userLocation={userLocation} />
-        </div>
       </main>
 
-      <FavoritesDialog
-        open={showFavorites}
-        onOpenChange={setShowFavorites}
+      {/* Bottom Navigation */}
+      <BottomNav
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
         language={language}
       />
     </div>

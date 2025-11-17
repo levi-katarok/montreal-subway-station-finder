@@ -32,7 +32,7 @@ export class WeatherService {
 
     try {
       const response = await fetch(
-        `${WEATHER_API_URL}?key=${WEATHER_API_KEY}&q=${MONTREAL_QUERY}&aqi=no`
+        `${WEATHER_API_URL}?key=${WEATHER_API_KEY}&q=${MONTREAL_QUERY}&aqi=yes`
       );
 
       if (!response.ok) {
@@ -73,8 +73,25 @@ export class WeatherService {
       humidity: data.current.humidity,
       windSpeed: Math.round(data.current.wind_kph),
       precipitation,
+      airQuality: data.current.air_quality?.['us-epa-index'],
+      airQualityLabel: data.current.air_quality
+        ? this.getAirQualityLabel(data.current.air_quality['us-epa-index'])
+        : undefined,
       timestamp: data.current.last_updated_epoch * 1000,
     };
+  }
+
+  /**
+   * Get air quality label from US EPA index
+   */
+  private static getAirQualityLabel(index: number): string {
+    if (index === 1) return 'Good';
+    if (index === 2) return 'Moderate';
+    if (index === 3) return 'Unhealthy for Sensitive Groups';
+    if (index === 4) return 'Unhealthy';
+    if (index === 5) return 'Very Unhealthy';
+    if (index === 6) return 'Hazardous';
+    return 'Unknown';
   }
 
   /**

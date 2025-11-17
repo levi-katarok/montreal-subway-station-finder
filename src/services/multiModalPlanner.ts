@@ -8,7 +8,6 @@ import type {
   JourneySegment,
   Station,
   Coordinates,
-  TravelMode,
   WeatherData,
 } from '../types';
 import { allStations, transferInfo } from '../data/stationsData';
@@ -144,7 +143,7 @@ export class MultiModalPlanner {
   private static async planParkAndRide(
     origin: Coordinates,
     destination: Station,
-    options: any
+    _options: any
   ): Promise<MultiModalRoute | null> {
     // Find nearby stations with parking
     const parkingStations = allStations.filter(
@@ -182,7 +181,9 @@ export class MultiModalPlanner {
         duration: 15, // Estimated metro time
         distance: 5000, // Estimated
         instructions: `Take metro to ${destination.name}`,
-        line: Array.isArray(closestParking.line) ? closestParking.line[0] : closestParking.line,
+        line: closestParking.type === 'metro' && closestParking.line ? 
+          (Array.isArray(closestParking.line) ? closestParking.line[0] : closestParking.line) : 
+          'green',
         cost: 3.75,
       },
     ];
@@ -203,7 +204,7 @@ export class MultiModalPlanner {
   private static async planBusMetroRoute(
     origin: Coordinates,
     destination: Station,
-    options: any
+    _options: any
   ): Promise<MultiModalRoute | null> {
     // Find nearest bus-accessible metro station
     const nearbyMetroStations = allStations
@@ -247,7 +248,9 @@ export class MultiModalPlanner {
         duration: 12,
         distance: 4000,
         instructions: `Take metro to ${destination.name}`,
-        line: Array.isArray(closestMetro.line) ? closestMetro.line[0] : closestMetro.line,
+        line: closestMetro.type === 'metro' && closestMetro.line ? 
+          (Array.isArray(closestMetro.line) ? closestMetro.line[0] : closestMetro.line) : 
+          'green',
       },
     ];
 
@@ -267,11 +270,11 @@ export class MultiModalPlanner {
   private static async planREMRoute(
     origin: Coordinates,
     destination: Station,
-    options: any
+    _options: any
   ): Promise<MultiModalRoute | null> {
     // Check if destination has REM connection
-    const hasREMConnection = destination.connections?.some(
-      (c) => c.type === 'rem'
+    const hasREMConnection = destination.type === 'metro' && destination.connections?.some(
+      (c: any) => c.type === 'rem'
     );
 
     if (!hasREMConnection) return null;
