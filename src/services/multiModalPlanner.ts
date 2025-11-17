@@ -11,7 +11,7 @@ import type {
   WeatherData,
 } from '../types';
 import { allStations, transferInfo } from '../data/stationsData';
-import { WeatherService } from './weatherService';
+import { WeatherService, type EnhancedWeatherData } from './weatherService';
 
 export class MultiModalPlanner {
   /**
@@ -24,7 +24,7 @@ export class MultiModalPlanner {
       allowDriving?: boolean;
       requireAccessible?: boolean;
       preferIndoor?: boolean;
-      weather?: WeatherData;
+      weather?: EnhancedWeatherData;
     } = {}
   ): Promise<MultiModalRoute[]> {
     const routes: MultiModalRoute[] = [];
@@ -66,7 +66,7 @@ export class MultiModalPlanner {
   private static async planDirectRoute(
     origin: Coordinates,
     destination: Station,
-    weather?: WeatherData
+    weather?: EnhancedWeatherData
   ): Promise<MultiModalRoute | null> {
     try {
       const distance = this.calculateDistance(origin, destination.location);
