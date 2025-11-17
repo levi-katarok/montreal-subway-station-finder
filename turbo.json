@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "env": ["NODE_ENV"]
+    },
+    "type-check": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "clean": {
+      "cache": false
+    }
+  },
+  "globalEnv": [
+    "VITE_OPENAI_API_KEY",
+    "VITE_GOOGLE_MAPS_API_KEY",
+    "GOOGLE_MAPS_API_KEY",
+    "NODE_ENV"
+  ],
+  "globalDependencies": ["**/.env", "**/.env.local"]
+}
